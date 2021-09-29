@@ -38,7 +38,7 @@ namespace WebApi.Controllers
 
             var client  = _httpClientFactory.CreateClient();
 
-            string url = "https://localhost:5001/api/MenuItem/"+ menuItemId.Id;
+            string url = "https://cloudpracticecheck.azurewebsites.net/api/MenuItem/"+ menuItemId.Id;
             var  request = new HttpRequestMessage(HttpMethod.Get, url);
 
             var response = await client.SendAsync(request);

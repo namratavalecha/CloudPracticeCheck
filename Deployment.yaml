@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudpractice-deployment
+  labels:
+    app: cloudpracticecheck
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudpracticecheck	  
+  template:
+    metadata:
+      labels:
+        app: cloudpracticecheck
+    spec:
+      containers:
+      - name: cloudpracticecheck
+        image: policyadministrationsystem.azurecr.io/cloudpracticecheckcr:latest
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: policyadminsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudpracticecheckservice
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: cloudpracticecheck
